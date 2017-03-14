@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html >
+    <head>
+        <meta charset="UTF-8">
+        <title>Review Management</title>
+        <script src='http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.min.js'></script>
+        <script src="js/index.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+    </head>
+    <body class = "grey lighten-4">
+        <div class="container">
+            <h1 class="text-center well"><span class="glyphicon glyphicon-edit"></span> Reviews</h1>
+            <div ng-app="myApp" ng-controller="myCtrl">
+                <div class="row">
+                    <div class="col s12 m12 l10">
+                        <div class="card-panel white hoverable">
+                            <form>
+                                <div class="form-group">
+                                    <label>Name:</label>
+                                    <input type="text" class="form-control" ng-model="editedItem.name"  />
+                                    <label>Review:</label>
+                                    <input   type="text" class="form-control materialize-textarea" ng-model="editedItem.year" />
+                                </div>
+                                <div class="row">
+                                    <input type="submit" value="ADD" class="btn left col s4" ng-click="addItem(editedItem)" />
+                                    <input type="submit" value="SAVE" class="btn left col s4 offset-s2" ng-click="save(editedItem)" />
+                                </div>
+                            </form>
+                            <div class="row">
+                                <div class="col s12 m12 l10">
+                                    <div class="card-panel white">
+                                        <form>
+                                            <br>
+                                            <div class="row">
+                                                <input type="submit" value="Sort by Name" class="btn left col s4" ng-click="sortType = 'name'; sortReverse = !sortReverse" />
+                                                <input type="submit" value="Sort by Year" class="btn left col s4 offset-s2" ng-click="sortType = 'year'; sortReverse = !sortReverse" />
+                                                <br>
+                                                <br>
+                                                (Sorting. Click twice for asc/desc)
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ul class="list-group">
+                    <li  ng-repeat="item in list | orderBy:sortType:sortReverse"   >
+                        <div class="row">
+                            <div class="col s12 m12 l10">
+                                <div class="card-panel white hoverable">
+                                    <span class="black-text">
+                                    <span class="badge"><a href="#" class="remove" ng-click="remove(item)">[ Remove ]<span class="glyphicon glyphicon-remove"></span></a></span>
+                                    <span class="badge"><a href="#" class="edit" ng-click="edit(item)">[ Edit ]</a></span>
+                                    {{ " \"\ " + item.year + " \"\ " + " - " + item.name }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>
